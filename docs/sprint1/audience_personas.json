@@ -1,0 +1,53 @@
+[
+  {
+    "id": "persona_rental_living",
+    "name": "Người trẻ ở trọ & Tối ưu không gian nhỏ (15–25m²)",
+    "archetype": "SMART_CONSUMER_AND_PROBLEM_SOLVER",
+    "core_demographic": "Sinh viên, nhân viên văn phòng mới đi làm, độ tuổi 20-30 tại Hà Nội & TP.HCM.",
+    "lifestyle_context": "Sống trong phòng trọ hoặc căn hộ dịch vụ nhỏ (15-25m²), thường xuyên đối mặt với tình trạng chật chội, bừa bộn, thiếu ánh sáng và ngân sách chi tiêu hạn hẹp. Ngại khoan đục tường vì chủ nhà phạt cọc.",
+    "reasons_to_follow": "Kênh này giúp mình sống tiện nghi, sạch sẽ và ngăn nắp trong không gian hẹp mà không tốn quá nhiều tiền. Đặc biệt là bóc tách giúp mình tránh mua phải những món đồ vô dụng trên mạng.",
+    "primary_pains": [
+      "Phòng 15m² nhìn đâu cũng thấy đồ, càng mua đồ đựng thì phòng càng chật",
+      "Bàn làm việc vừa để laptop, vừa để đồ ăn, dây điện lòng thòng dưới chân",
+      "Chủ nhà cấm khoan tường, mua móc dán 10k thì rơi vỡ đồ, hỏng tường",
+      "Quần áo phơi trong phòng lâu khô, ẩm mốc và có mùi khó chịu",
+      "Xem review TikTok mua cả đống đồ về dùng được 2 hôm vứt xó vì chất lượng tệ"
+    ],
+    "free_solutions": [
+      "Nguyên tắc '1 vào 1 ra' (One in, one out) để kiểm soát đồ đạc phòng nhỏ",
+      "Cách phân vùng công năng: ngủ - làm việc - nấu ăn bằng cách bố trí lại tủ kệ sẵn có",
+      "Mẹo đi dây điện an toàn bằng dây thun và kẹp bướm văn phòng 0 đồng",
+      "Bí quyết tạo đối lưu thông gió phòng trọ khép kín giảm 3 độ C mùa hè"
+    ],
+    "monetization_opportunities": [
+      "Kệ treo không khoan tường chịu lực thật (đã qua kiểm chứng)",
+      "Hộp lưu trữ gấp gọn thông minh tận dụng gầm giường / nóc tủ",
+      "Khay quản lý dây điện và ổ cắm an toàn chống cháy nổ",
+      "Đèn led góc bàn làm việc bảo vệ mắt, không chiếm diện tích"
+    ]
+  },
+  {
+    "id": "persona_desk_worker",
+    "name": "Dân văn phòng & Freelancer ngồi máy tính 8–10 tiếng",
+    "archetype": "SMART_CONSUMER_AND_PROBLEM_SOLVER",
+    "core_demographic": "Lập trình viên, designer, marketer, kế toán làm việc tại nhà (Hybrid / Remote).",
+    "lifestyle_context": "Ngồi lì một chỗ trước màn hình, hay bị đau mỏi vai gáy, mỏi mắt, bàn làm việc bừa bãi làm giảm khả năng tập trung.",
+    "reasons_to_follow": "Giúp nâng cao hiệu suất làm việc, sửa tư thế ngồi tránh thoái hóa đốt sống cổ, và tư vấn đồ setup công thái học chuẩn chỉ, đáng từng xu.",
+    "primary_pains": [
+      "Mới 3h chiều đã mỏi rã rời cổ và thắt lưng vì ngồi sai tư thế",
+      "Bàn làm việc bừa bộn khiến não bộ bị phân tâm, giảm 50% hiệu suất làm việc",
+      "Màn hình máy tính quá thấp, gù lưng cúi mặt khi gõ phím",
+      "Ánh sáng đèn phòng chói vào màn hình làm mỏi mắt và đau đầu"
+    ],
+    "free_solutions": [
+      "Quy tắc 20-20-20 bảo vệ mắt khỏi ánh sáng xanh",
+      "Tư thế ngồi 90-90 chuẩn công thái học không tốn tiền mua ghế công thái học đắt đỏ",
+      "Bài tập giãn cơ 3 phút ngay trên ghế văn phòng"
+    ],
+    "monetization_opportunities": [
+      "Giá đỡ laptop chỉnh góc nâng tầm mắt",
+      "Đèn treo màn hình chống chói bảo vệ mắt",
+      "Kẹp giữ dây cáp chống rối và thảm da trải bàn"
+    ]
+  }
+]

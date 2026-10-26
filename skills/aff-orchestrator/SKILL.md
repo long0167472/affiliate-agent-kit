@@ -45,3 +45,22 @@ If a platform/API capability is unverified, assign a small capability check and 
 ## Completion signal
 
 For each cycle, report one of `LEARNED`, `SHIPPED`, `NEEDS_EVIDENCE`, `BLOCKED`, or `STOPPED`, linked to artifacts. Include what was tested, what changed, what was observed, what remains uncertain, cost incurred, and the single next action. In a public or owner-facing dashboard, separate agent actions from measured business results and label simulated actions visibly. Preserve failed tests as knowledge; never rewrite a hypothesis after seeing results.
+
+## Execution Engine & Growth Intelligence System
+
+The system operates as an **AI Growth & Conversion System** with two distinct modes:
+- **Exploration Mode (Stage A):** For brand new channels without audience data. Executes Sprint 1 Market Discovery across 18 niches (TikTok Shop + Shopee VN), scores via 100-pt evidence model, and produces 6 controlled test videos (2 per top niche) at zero API cost.
+- **Exploitation Mode (Stage B/C/D):** Analyzes incoming TikTok Creator Analytics, diagnoses funnel failure points (`LOW_VIEWS`, `IMPROVE_CLICKS`, `IMPROVE_CONVERSIONS`, `SCALE_WINNER`), and enforces `STOP` / `ITERATE` / `SCALE` portfolio decisions.
+
+CLI Commands:
+- `python cli.py sprint1-discover`: Execute Sprint 1 market discovery across 18 niches and generate all deliverables in `docs/sprint1/`.
+- `python cli.py view-niches`: View ranked table of 18 niches.
+- `python cli.py growth-calc`: Reverse calculate required views and order probabilities from target profit.
+- `python cli.py plan-test --sku <SKU>`: Generate 3-angle controlled test matrix for an SKU.
+- `python cli.py log-metrics --sku <SKU> --video-id <ID> --views <N> --clicks <N> --orders <N>`: Ingest live post metrics and run TikTok 2026 diagnosis.
+- `python cli.py growth-diagnosis --sku <SKU>`: Detailed funnel diagnosis and STOP / ITERATE / SCALE status.
+- `python cli.py growth-portfolio`: Portfolio-wide performance and decisions summary.
+- `python cli.py status`: Inspect factory queue, database, and ready packages.
+- `python cli.py run-sample`: Run end-to-end product production pipeline.
+- `python cli.py process-queue`: Process queued jobs with crash recovery.
+- `python cli.py open-flow --sku <SKU>`: Open Google Flow assistant.

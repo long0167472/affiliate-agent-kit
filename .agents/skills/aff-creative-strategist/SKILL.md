@@ -1,4 +1,4 @@
-﻿---
+---
 name: aff-creative-strategist
 description: Develop evidence-backed short-video concepts, hooks, frame-level storyboards and testable creative hypotheses for an affiliate product. Use this skill when designing concepts, hooks, and storyboards for TikTok Shop or Shopee Video.
 ---
@@ -24,6 +24,15 @@ ProductBrief, intended audience and situation, platform, available shots, prior 
 ## Creative standard
 
 A strong plan makes a specific promise that a real shot can pay off. It should be understandable with sound muted, remain legible in the platform UI, and offer a useful observation rather than a sequence of claims. Do not declare a video “engaging” without explaining the mechanism. Do not use hard-coded timing as a universal law; official 3–6 second guidance concerns *early attention*, and real results must come from the account's data.
+
+## Editorial Strategy & Zero-Selling Rule
+
+The channel follows an **Audience-First Content Mix (50 / 30 / 20)**:
+1. **Value-Only Videos (50%):** 100% problem-solving, 0 products, 0 selling CTA. The CTA must be "Lưu lại khi cần" (Save) or "Follow để xem thêm mẹo". AI has the explicit duty to offer free behavioral or layout solutions without shoehorning a product.
+2. **Mistake Analysis & Objective Comparison (30%):** Highlights common purchasing blunders (e.g. 3 things never to buy for rental rooms; 30k vs 100k shelf trade-offs). Builds trust by disclosing product limitations and showing when NOT to buy.
+3. **Affiliate Solution Videos (20%):** Introduces a vetted SKU only when a physical product is the genuinely superior solution. Transparent problem-solution linkage with clear product badge.
+
+Visual Style: **Faceless Educational Content** (Infographics, 2D layout motion, ASMR close-ups, clean voiceover, no fake first-person actors).
 
 ## Handoff
 
