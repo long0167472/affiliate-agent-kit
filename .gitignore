@@ -1,0 +1,29 @@
+# Runtime state and credentials
+.env
+.env.*
+!.env.example
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+auth.json
+*.token
+secrets/
+
+# Generated media and local data
+data/
+renders/
+media/
+tmp/
+node_modules/
+.venv/
+__pycache__/
+*.pyc
+
+# Editor/OS
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
