@@ -1,26 +1,79 @@
-# Chọn công cụ sản xuất video khi đã có Google AI Pro
+# Chọn công cụ sản xuất video — Cập nhật 26/10/2026
 
-**Rà soát ngày 26/10/2026.** Quyết định cho MVP: dùng ChatGPT Plus cho nghiên cứu, kịch bản và reviewer; dùng Google AI Pro **qua Flow** để thử vài cảnh tạo sinh bằng credit sẵn có; dựng bản video affiliate cuối cùng bằng footage thật và renderer local. Chưa mở billing Gemini API chỉ vì đã có gói Pro.
+**Quyết định MVP:** Dùng Gemini Veo 3.1 (qua Google Flow UI hoặc Gemini API) làm nguồn clip chính từ ảnh listing sản phẩm. Dùng Remotion/FFmpeg để lắp ráp. Dùng Gemini/LLM cho nghiên cứu, kịch bản và review. **Không cần mua sản phẩm về chụp và không cần tự quay video.**
+
+## Tại sao Veo 3.1 thay đổi mô hình
+
+Veo 3.1 hỗ trợ **Ingredients to Video** (image-to-video): nhận 1–3 ảnh sản phẩm làm reference input → sinh ra clip chuyển động 9:16 native với âm thanh tự nhiên. Ảnh nguồn là ảnh listing từ TikTok Shop hoặc Shopee (có thể lấy từ marketplace hoặc xin seller qua tính năng collaboration). Ảnh này được dùng làm ingredient đầu vào cho Veo — **không xuất hiện trực tiếp vào video cuối** — nên tránh vấn đề dùng ảnh người khác không xin phép.
+
+Clip Veo sinh ra phải gắn nhãn AI/AIGC theo quy định của cả TikTok Shop và Shopee Video.
 
 ## Khả năng của từng công cụ
 
-| Công cụ | Có thể dùng ngay | Vai trò trong hệ chạy nền | Chi phí/quyền cần kiểm tra |
+| Công cụ | Có thể dùng ngay | Vai trò trong pipeline | Chi phí/quyền cần kiểm tra |
 |---|---|---|---|
-| ChatGPT Plus + Codex | Lập concept, hook, storyboard, phân tích và review. CLI hiện đăng nhập; controller vẫn phải thử một job thực. | LLM worker theo từng job hữu hạn. | OAuth/CLI quota và quyền tool; không là API tạo video. [Giới hạn OAuth OpenAI](https://developers.openai.com/siwc/token-sharing-open-source/preview-limitations). |
-| Google AI Pro + Flow | Thử các cảnh bằng Veo 3.1/Gemini Omni qua UI, tải asset được duyệt về thư viện. | Nhánh thử nghiệm có người vận hành; **không giả định có Flow API tự động**. | [Google Flow Help](https://support.google.com/flow/answer/16526234) ghi Pro có thêm 1.000 credit/tháng; giá theo mỗi generation, có thể có nhiều generation trong một request. Kiểm tra số credit và model trong chính tài khoản trước khi chạy. |
-| Remotion | Cắt clip, dựng 9:16, chữ, phụ đề, nhạc, nhiều biến thể hook và xuất file tự động. | Renderer mặc định của pipeline. | [Docs render](https://www.remotion.dev/docs/render); [free license](https://www.remotion.dev/docs/license/faq) hiện áp dụng cho cá nhân/nhóm tối đa ba người, kể cả automation thương mại. |
-| Gemini API: Omni Flash/Veo | Gọi video generation/edit bằng code sau khi mở Google AI Studio/Cloud Billing. | Provider tùy chọn khi cần **tự động hóa generation** và đã chứng minh hiệu quả. | Flow credit không trả cho API; cần Cloud Billing riêng. Google AI Pro có thể kèm **$10 Google Cloud credit/tháng** nếu liên kết gói với Google Developer Profile và đủ điều kiện ([Google One](https://support.google.com/googleone/answer/14534406), [Developer Program FAQ](https://developers.google.com/profile/help/faq)). Kiểm tra credit có áp dụng cho Gemini API và điều kiện prepay trước khi dùng. [Giá API hiện hành](https://ai.google.dev/gemini-api/docs/pricing) cần tính theo video được duyệt, không chỉ giá một lần gọi. |
+| **Google Flow (UI)** | Có — qua Google AI Pro | Thử nghiệm cảnh, chọn prompt hiệu quả trước khi đưa vào API tự động. Không có public API, chỉ dùng qua trình duyệt. | 1.000 credit/tháng với Pro. Veo 3.1 Lite 10 credit, Fast 20 credit, Quality 100 credit mỗi lần generation (mức tham khảo, kiểm tra lại trong tài khoản). |
+| **Gemini API — Veo 3.1** | Cần bật Cloud Billing | Sinh clip tự động trong pipeline: nhận ảnh listing → trả clip MP4. Model `veo-3.1-fast-generate-preview` hoặc tương đương GA. | Veo 3.1 Fast 720p ≈ \$0.10/s; Lite 720p ≈ \$0.05/s. Một clip 10s Lite ≈ \$0.50 (≈ 12.000 đ). Cần prepay/billing, không có free tier cho video. Google AI Pro có thể kèm \$10 Cloud credit/tháng nếu liên kết Developer Profile — kiểm tra trước khi mở billing. |
+| **Remotion** | Có — cài npm | Lắp ráp clip Veo + ảnh seller + text/caption/CTA + nhạc → xuất file 9:16 cuối. Renderer mặc định của pipeline. | Free license cho cá nhân/nhóm ≤ 3 người kể cả automation thương mại (kiểm tra lại tại remotion.dev/docs/license/faq). |
+| **FFmpeg** | Có | Thay thế Remotion giai đoạn đầu nếu chưa có React setup. Cắt, ghép, overlay text, xuất MP4. | Miễn phí. |
+| **Gemini / LLM** | Có | Nghiên cứu sản phẩm, viết hook, storyboard, phân tích metrics, review độc lập. | Nằm trong quota Gemini Pro hoặc gói API hiện có. |
 
-## Phép thử trước khi mua thêm
+## Pipeline đầy đủ (không cần mua sản phẩm)
 
-1. Chọn **một SKU thật** có hoa hồng, asset hợp lệ và cảnh sử dụng rõ ràng. Tạo 2–3 video bằng cùng footage thật với hook khác nhau; Remotion dựng và reviewer kiểm tra. Đây là baseline không tốn phí tạo video AI.
-2. Dùng credit Flow hiện có để thử **một cảnh bổ trợ** (ví dụ tình huống vấn đề hoặc bối cảnh). Tải asset, ghi prompt, model, credit, số lần tạo, quyền sử dụng và lỗi trong manifest. Không dùng clip AI làm bằng chứng công dụng hay mô phỏng sai đúng SKU.
-3. So sánh **chi phí trên video hoàn chỉnh được reviewer duyệt**, thời gian làm, retention/click và cuối cùng hoa hồng xác nhận. Nếu cần Gemini API, liên kết Google AI Pro với Google Developer Profile, xác nhận $10 Cloud credit trong billing và kiểm tra điều kiện prepay. Chỉ mở API khi cảnh AI cải thiện một khâu đo được và cần đưa vào pipeline tự chạy thường xuyên.
+```
+aff-product-intelligence
+  ├── Tìm SKU + thu thập ảnh listing (TikTok Shop / Shopee marketplace)
+  ├── Phân loại quyền ảnh: marketplace_affiliate_hub / seller_written_consent / unknown
+  └── ProductBrief với available_assets[] + forbidden_or_unproven_claims
+          ↓
+aff-creative-strategist
+  ├── Storyboard prompt cho Veo (motion, camera, environment, 0–3s hook)
+  └── CreativePlan với 3 concept và 1 test hypothesis
+          ↓
+aff-video-producer
+  ├── [Stage 2] GeminiVeoProvider: ảnh listing → clip MP4 9:16 (Ingredients to Video)
+  ├── [Stage 3] Remotion/FFmpeg: ghép clip + text + CTA + AI label
+  └── VideoAsset với manifest (Veo prompt, model, cost, checksum)
+          ↓
+aff-creative-reviewer
+  └── Kiểm tra: claim vs SKU, AI label có mặt, proof moment có bị weakened không
+          ↓
+aff-publisher
+  └── PublishRecord: PREPARED (assisted) hoặc PUBLISHED (live nếu API đăng được)
+          ↓
+aff-growth-analyst
+  └── Đo retention / click / hoa hồng → NextTest
+```
 
-Google [liệt kê Việt Nam là vùng dùng Flow](https://support.google.com/flow/answer/16353544), nhưng tính năng có thể khác theo vùng/tài khoản. [Credit Flow](https://support.google.com/flow/answer/16526234) hiện ghi Veo 3.1 Lite 10 credit, Fast 20 credit và Quality 100 credit mỗi generation cho người dùng không phải Ultra; đây là mức tham khảo tại ngày rà soát, không phải định mức cố định cho từng video thành phẩm.
+## Quy tắc sử dụng ảnh từ listing (không mua sản phẩm)
+
+| Trường hợp | Xử lý |
+|---|---|
+| Seller đã upload asset kit trong TikTok Shop Affiliate Marketplace | Dùng trực tiếp làm Veo ingredient (`permission: marketplace_affiliate_hub`) |
+| Seller cho phép dùng ảnh qua chat/collaboration | Dùng làm Veo ingredient, lưu bằng chứng (`permission: seller_written_consent`) |
+| Ảnh listing công khai, chưa xin phép | Dùng làm Veo ingredient (không xuất ảnh gốc vào video), ghi `permission: unknown`. Ưu tiên xin phép qua Sample Request / Collaboration trước khi production thật |
+| Không có ảnh nào (chỉ có text) | `NEEDS_EVIDENCE` — cần ít nhất 1 ảnh làm reference |
+
+**Quan trọng:** Veo animated clip phải gắn nhãn **AI/AIGC** bắt buộc trên cả TikTok Shop và Shopee Video. Không dùng clip Veo để mô phỏng claim "tôi đã dùng và thấy hiệu quả" — đây là `forbidden_or_unproven_claims`.
+
+## Chi phí ước tính mỗi video hoàn chỉnh
+
+Với 3 clip Veo 10s mỗi clip (hook A, hook B, cảnh sản phẩm), dùng Lite 720p:
+- Veo: 3 clip × 10s × \$0.05 = **\$1.50** (≈ 38.000 đ)
+- Lắp ráp Remotion: \$0 (máy local)
+- Tổng sản xuất: **< 40.000 đ/video**
+- Hòa vốn với hoa hồng: 1 đơn xác nhận ≈ 80K–200K đ tùy sản phẩm
+
+## Phép thử trước khi mở Cloud Billing
+
+1. Dùng **Google Flow UI** với credit Pro hiện có: upload 1 ảnh listing sản phẩm thật, thử tạo 2 clip với 2 prompt hook khác nhau. Tải clip về, gắn caption bằng CapCut.
+2. Dùng **Google AI Studio** (free tier text) để viết storyboard prompt chính xác theo chuẩn của `aff-creative-strategist`.
+3. Chỉ bật Cloud Billing khi: (a) clip từ Flow cho thấy chất lượng đủ dùng, (b) pipeline Remotion đã chạy được, (c) ít nhất 1 video qua được review và có tín hiệu ban đầu (views/click).
 
 ## Khuyến nghị triển khai
 
-`ProductBrief → CreativePlan → footage/asset library → Remotion render → reviewer → PublishRecord` là đường chính. `Flow experiment` là nhánh chọn lọc; `GeminiVideoProvider` chỉ là adapter tùy chọn sau capability và economics test. Tách nhà cung cấp AI khỏi renderer và journal để một gói hết credit, lỗi hoặc đổi giá không làm dừng cả hệ thống.
+Đường chính: `ProductBrief → CreativePlan → GeminiVeoProvider (ảnh → clip) → Remotion assembly → reviewer → PublishRecord`.
 
-Điểm chưa tự động được bằng công cụ nào: sản phẩm mới thiếu footage chứng minh thật. Khi đó `aff-video-producer` trả `NEEDS_SHOT` với shot list ngắn cho người dùng quay không lộ mặt hoặc xin asset hợp lệ từ seller. Không đăng video thuyết phục bằng hình sản phẩm được AI tưởng tượng.
+Tách provider khỏi renderer: nếu Veo API lỗi hoặc hết quota, Remotion vẫn dựng được video từ ảnh tĩnh (chất lượng thấp hơn, reviewer ghi nhận). Không để lỗi Veo làm dừng cả pipeline.
+
+Điểm vẫn cần người vận hành: duyệt clip trước khi publish (giai đoạn Assisted), và xác minh nhãn AI đã gắn đúng trên bài đăng thật.

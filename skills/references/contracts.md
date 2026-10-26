@@ -12,7 +12,9 @@ Use these fields as the minimum shared language. Store each artifact with a stab
 
 ## ProductBrief
 
-`product_id`, `discovery_batch_id`, `platform`, `sku_and_variant`, `listing_url`, `seller`, `observed_at`, `price_range`, `commission_basis`, `stock_status`, `eligibility{status,source,checked_at}`, `sample_availability`, `audience_problem`, `visual_proof`, `available_assets[{id,source,permission}]`, `verified_claims[{claim,source,observed_at,confidence}]`, `forbidden_or_unproven_claims`, `limitations`, `economics{commission_per_confirmed_order,cost_per_video,break_even_orders}`, `refresh_after`, `status`. `available_assets.permission` is the asset-rights record; use `unknown` until verified.
+`product_id`, `discovery_batch_id`, `platform`, `sku_and_variant`, `listing_url`, `seller`, `observed_at`, `price_range`, `commission_basis`, `stock_status`, `eligibility{status,source,checked_at}`, `sample_availability`, `audience_problem`, `visual_proof`, `available_assets[{id,source,url,permission,veo_eligible}]`, `verified_claims[{claim,source,observed_at,confidence}]`, `forbidden_or_unproven_claims`, `limitations`, `economics{commission_per_confirmed_order,veo_cost_per_clip,cost_per_video,break_even_orders}`, `refresh_after`, `status`.
+
+`available_assets.permission` values: `marketplace_affiliate_hub` (seller placed in official affiliate hub — safest), `seller_written_consent` (explicit permission obtained, evidence ref required), `unknown` (listing image not yet cleared — eligible as Veo reference ingredient only, not for direct export into final video), `unavailable` (no image exists, pipeline cannot proceed). `veo_eligible: true` when `permission` is any value except `unavailable`. `economics.veo_cost_per_clip` is the estimated API cost at `duration_seconds × price_per_second` for the chosen model tier (Lite ≈ \$0.05/s, Fast ≈ \$0.10/s at 720p).
 
 ## CreativePlan
 
@@ -20,7 +22,9 @@ Use these fields as the minimum shared language. Store each artifact with a stab
 
 ## VideoAsset
 
-`asset_id`, `plan_id`, `variant_id`, `platform`, `render_path`, `checksum`, `duration`, `dimensions`, `first_frame_path`, `source_manifest`, `ai_usage`, `qa_findings[{timestamp,issue,resolution}]`, `unresolved_limits`, `status`.
+`asset_id`, `plan_id`, `variant_id`, `platform`, `render_path`, `checksum`, `duration`, `dimensions`, `first_frame_path`, `source_manifest`, `ai_usage{provider,model,prompt_hash,reference_asset_ids,cost_usd,generated_at}`, `qa_findings[{timestamp,issue,resolution}]`, `unresolved_limits`, `status`.
+
+`ai_usage.provider`: `GEMINI_VEO` when Veo API was used for clip generation; `NONE` when only deterministic rendering was used. `unresolved_limits` must include `PROOF_WEAKENED_BY_AI` when the generated clip cannot credibly show physical evidence required by the `CreativePlan` (e.g., texture change, liquid absorption, before/after skin effect). Reviewer must challenge any `PROOF_WEAKENED_BY_AI` asset before marking `READY`.
 
 ## PublishRecord
 

@@ -13,11 +13,14 @@ Bộ thiết kế cho hệ affiliate TikTok Shop và Shopee Video của một de
 | [`docs/affiliate-account-decision.md`](docs/affiliate-account-decision.md) | Tách đời tư và lộ trình tài khoản mới. |
 | [`docs/concat-reference-analysis.md`](docs/concat-reference-analysis.md) | Điều học từ nhật ký ConCat và cách đọc đúng số lãi. |
 | [`scripts/install-skills.ps1`](scripts/install-skills.ps1) | Cài bản sao các skill từ repo vào Codex trên Windows. |
+| [`scripts/install-skills-antigravity.ps1`](scripts/install-skills-antigravity.ps1) | Cài bản sao các skill từ repo vào Antigravity (`.agents/skills/` và `~/.gemini/config/skills/`). |
 
 ## Bắt đầu
 
 1. Đọc [quyết định công cụ](docs/production-tools.md) và [kiến trúc controller](docs/affiliate-controller-architecture.md).
-2. Nếu dùng Codex trên Windows, chạy `pwsh -File .\scripts\install-skills.ps1` trong thư mục repo. Script dừng nếu skill đích đã tồn tại; thêm `-Force` khi chủ động cập nhật chúng.
+2. Cài đặt skill tương ứng với công cụ bạn dùng:
+   - Dành cho **Codex**: chạy `powershell -File .\scripts\install-skills.ps1` (hoặc `pwsh`). Thêm `-Force` khi cần ghi đè.
+   - Dành cho **Antigravity**: chạy `powershell -ExecutionPolicy Bypass -File .\scripts\install-skills-antigravity.ps1 -Force`. Script sẽ thiết lập cả workspace skills (`.agents/skills/`) và global skills (`~/.gemini/config/skills/`).
 3. Xây controller theo thứ tự trong tài liệu: queue/journal và chế độ giả lập trước; sau đó mới kết nối tài khoản, asset, renderer, publisher và số liệu.
 4. Trước khi cấp quyền đăng, xác minh **trên tài khoản thật** quyền gắn sản phẩm và khả năng đọc lại bài đã đăng. Đăng video thường không chứng minh đăng được video affiliate có SKU.
 
