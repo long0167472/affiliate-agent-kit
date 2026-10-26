@@ -241,6 +241,14 @@ def main():
         print(f"  -> Thời lượng video: {total_duration:.1f} giây")
         print(f"  -> Kích thước: {size_mb:.2f} MB")
         print(f"  -> Độ phân giải: 1080x1920 (Chuẩn dọc 9:16)")
+
+        # Tự động đồng bộ sang Google Drive nếu máy đã cài Google Drive Desktop
+        gdrive_folder = pathlib.Path("G:/My Drive/Affiliate_Videos")
+        if gdrive_folder.parent.exists():
+            gdrive_folder.mkdir(parents=True, exist_ok=True)
+            import shutil
+            shutil.copyfile(final_video, gdrive_folder / final_video.name)
+            print(f"  -> [TỰ ĐỘNG SYNC] Đã sao chép sang Google Drive: {gdrive_folder / final_video.name}")
         print("=" * 70)
     else:
         print("Lỗi ghép video.")
